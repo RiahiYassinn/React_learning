@@ -3,9 +3,11 @@ import { Button } from "react-bootstrap";
 
 interface Props {
   count: number;
+  initialCount: number;
+  step: number;
 }
 
-function Compteur({ count }: Props) {
+function Compteur({ count, step }: Props) {
   const [stateCount, setCount] = useState(0);
 
   return (
@@ -13,17 +15,18 @@ function Compteur({ count }: Props) {
       <h1>Compteur : {stateCount}</h1>
       <button
         className="btn btn-primary"
-        onClick={() => setCount(stateCount + 1)}
+        onClick={() => setCount(stateCount + step)}
       >
-        + 1
+        + {step}
       </button>
+      &nbsp; &nbsp;
       <button
         className="btn btn-primary"
-        onClick={() => setCount(stateCount - 1)}
+        onClick={() => setCount(stateCount - step)}
       >
-        {" "}
-        - 1{" "}
+        - {step}
       </button>
+      &nbsp; &nbsp;
       <button className="btn btn-primary" onClick={() => setCount(0)}>
         reset
       </button>
