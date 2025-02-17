@@ -52,8 +52,7 @@ function ListGroup({
               &nbsp; &nbsp;
               <button
                 className="btn btn-primary"
-                onClick={(e) => {
-                  e.stopPropagation();
+                onClick={() => {
                   handleDelete(index);
                 }}
               >
