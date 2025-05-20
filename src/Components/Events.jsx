@@ -1,13 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import Event from './Event';
-import { Container, Row, Alert, Button } from 'react-bootstrap';
-import eventsData from '../assets/events.json';
+import { Container, Row, Alert, Spinner } from 'react-bootstrap';
+import { getAllEvents } from '../service/api';
+import { useNavigate } from 'react-router-dom';
 
 const Events = () => {
-  const [events, setEvents] = useState(eventsData);
+  const [events, setEvents] = useState({
+    name: '',
+    description: '',
+    img: '',
+    price: 0,
+    nbTickets: 0,
+    nbParticipants: 0,
+    like: false
+  });
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [showWelcome, setShowWelcome] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchEvents();
+  }, []);
+
+  const fetchEvents = async () => {
+    try {
+      const response = await getAllEvents();
+      setEvents(response.data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Fonction de cycle de vie - Montage du composant
   useEffect(() => {
@@ -58,6 +85,22 @@ const Events = () => {
       )
     );
   };
+
+    if (loading) {
+    return (
+      <Container className="d-flex justify-content-center mt-5">
+        <Spinner animation="border" />
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container className="mt-4">
+        <Alert variant="danger">{error}</Alert>
+      </Container>
+    );
+  }
 
   return (
     <Container className="mt-4">

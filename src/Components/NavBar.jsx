@@ -29,6 +29,15 @@ const NavigationBar = () => {
             >
               Événements
             </Nav.Link>
+            <Nav.Link 
+              as={NavLink} 
+              to="/add-event"
+              style={({ isActive }) => ({
+                textDecoration: isActive ? 'underline' : 'none'
+              })}
+            >
+              Ajouter un événement
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
