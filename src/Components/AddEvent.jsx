@@ -132,6 +132,19 @@ const AddEvent = () => {
             {errors.nbTickets}
           </Form.Control.Feedback>
         </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Nombre de Participants</Form.Label>
+          <Form.Control
+            type="number"
+            name="nbParticipants"
+            value={event.nbParticipants}
+            onChange={handleChange}
+            isInvalid={!!errors.nbParticipants}
+          />
+                    <Form.Control.Feedback type="invalid">
+            {errors.nbParticipants}
+          </Form.Control.Feedback>
+        </Form.Group>
 
         <div className="d-flex gap-2">
           <Button variant="primary" type="submit">
